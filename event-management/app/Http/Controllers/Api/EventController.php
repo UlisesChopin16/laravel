@@ -7,6 +7,7 @@ use App\Http\Resources\EventResource;
 use App\Http\Traits\CanLoadRelationships;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class EventController extends Controller
 {
@@ -17,7 +18,7 @@ class EventController extends Controller
      */
     public function index()
     {
-
+        Gate::authorize('viewAny', Event::class);
         $query = Event::query();
         $query = $this->loadRelationships($query);
 
