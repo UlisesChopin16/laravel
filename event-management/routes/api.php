@@ -16,7 +16,7 @@ Route::get('/user', function (Request $request) {
 
 
 Route::apiResource('events', EventController::class)
-    ->only(['index','store', 'update', 'destroy'])
+    ->only(['index', 'show', 'store', 'update', 'destroy'])
     ->middleware([
         'auth:sanctum',
         // 'throttle:api'
