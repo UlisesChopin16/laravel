@@ -35,8 +35,9 @@
 <body class="container mx-auto mt-10 mb-10 max-w-lg">
 
 
-    <livewire:scripts />
     <livewire:create-poll />
+
+    @livewireScripts
 
 </body>
 
