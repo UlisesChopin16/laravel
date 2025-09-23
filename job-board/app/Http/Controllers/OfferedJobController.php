@@ -12,7 +12,15 @@ class OfferedJobController extends Controller
      */
     public function index()
     {
-        return view('job.index', ['offered_jobs' => OfferedJob::all()]);
+        $jobs = OfferedJob::query();
+
+        $jobs->when(request('search'), function ($query) {
+            $query->where('title', 'like', '%' . request('search') . '%')
+                  ->orWhere('description', 'like', '%' . request('search') . '%')
+                  ->orWhere('location', 'like', '%' . request('search') . '%');
+        });
+
+        return view('job.index', ['offered_jobs' => $jobs->get()]);
     }
 
     /**
@@ -28,15 +36,15 @@ class OfferedJobController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(OfferedJob $offered_job)
     {
-        //
+        return view('job.show', ['job' => $offered_job]);
     }
 
     /**
