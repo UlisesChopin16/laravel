@@ -95,4 +95,8 @@ foreach ($db_connections as $db_name => $check) {
 // In the terminal execute
 // composer --version
 
-// install table plus
+// install table plus 
+// https://tableplus.com/download
+
+// create project
+// composer create-project --prefer-dist laravel/laravel check
