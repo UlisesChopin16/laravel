@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 
-defineProps({
+const props = defineProps({
   type: { type: String, default: 'text' },
   name: { type: String, required: true },
   placeholder: { type: String, default: '' },
@@ -10,14 +10,19 @@ defineProps({
 });
 
 const input = ref(null);
-const form = ref(null);
 
 function clearAndSubmit() {
   if (input.value) {
     input.value.value = '';
   }
-  if (form.value) {
-    form.value.submit();
+
+  if (props.formRef) {
+    const formEl = document.getElementById(props.formRef);
+    if (formEl) {
+      formEl.submit();
+    } else {
+      console.warn(`Form with id="${props.formRef}" not found`);
+    }
   }
 }
 </script>
@@ -32,7 +37,7 @@ function clearAndSubmit() {
           <svg xmlns="http://www.w3.org/2000/svg" fill="none"
             viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="h-4 w-4 text-slate-500">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </template>
@@ -43,7 +48,7 @@ function clearAndSubmit() {
              :value="value"
              :id="name"
              ref="input"
-             class="w-full rounded-md border-0 py-1.5 px-2.5 text-sm ring-1 placeholder:text-slate-400 focus:ring-2" />
+             class="pr-8 w-full rounded-md border-0 py-1.5 px-2.5 text-sm ring-1 placeholder:text-slate-400 focus:ring-2" />
     </template>
 
     <template v-else>
