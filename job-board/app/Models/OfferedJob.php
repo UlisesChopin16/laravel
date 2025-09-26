@@ -5,15 +5,25 @@ namespace App\Models;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OfferedJob extends Model
 {
     /** @use HasFactory<\Database\Factories\OfferedJobFactory> */
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public static array $experience = ['entry', 'intermediate', 'senior'];
 
     public static array $categories = ['IT', 'Finance', 'Marketing', 'Sales', 'HR'];
+
+    protected $fillable = [
+        'title',
+        'location',
+        'salary',
+        'description',
+        'experience',
+        'category'
+    ];
 
     public function employer()
     {
