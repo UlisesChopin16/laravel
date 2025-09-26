@@ -12,28 +12,36 @@
 <body
     class="from-10% via-30% to-90% mx-auto mt-10 max-w-2xl bg-gradient-to-r from-indigo-100 via-sky-100 to-emerald-100 text-slate-700">
     <div id="app">
-        <nav class="mb-8 flex justify-between text-lg font-medium">
+        <nav class="mb-8 flex justify-between items-center text-lg font-medium">
             <ul class="flex space-x-2">
                 <li>
-                    <a href="{{ route('offered_jobs.index') }}">Home</a>
+                    <a href="{{ route('offered_jobs.index') }}">
+                        Home
+                        @auth
+                            <p class="text-sm font-normal py-0 text-slate-500">
+                                {{ auth()->user()->name ?? 'Anynomus' }}
+                            </p>
+                        @endauth
+                    </a>
+
                 </li>
             </ul>
 
             <ul class="flex space-x-2">
                 @auth
                     <li>
-                        <a href="{{ route('my-job-applications.index') }}">
-                            {{ auth()->user()->name ?? 'Anynomus' }}: Applications
+                        <a href="{{ route('my-job-applications.index') }}" class="underline hover:text-slate-500">
+                            Applications
                         </a>
                     </li>
-                    {{-- <li>
-                        <a href="{{ route('my-jobs.index') }}">My Jobs</a>
-                    </li> --}}
+                    <li>
+                        <a href="{{ route('my-jobs.index') }}" class="underline hover:text-slate-500">My Jobs</a>
+                    </li>
                     <li>
                         <form action="{{ route('auth.destroy') }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button>Logout</button>
+                            <button class="underline cursor-pointer hover:text-slate-500">Logout</button>
                         </form>
                     </li>
                 @else

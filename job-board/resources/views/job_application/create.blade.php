@@ -21,10 +21,10 @@
         <x-text-input type="number" name="expected_salary" />
       </div>
 
-      {{-- <div class="mb-4">
+      <div class="mb-4">
         <x-label for="cv" :required="true">Upload CV</x-label>
         <x-text-input type="file" name="cv" />
-      </div> --}}
+      </div>
 
       <x-button class="w-full">Apply</x-button>
     </form>

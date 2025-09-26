@@ -21,7 +21,7 @@
         </h2>
 
         <div class="text-sm text-slate-500">
-            @foreach ($job->employer->jobs as $otherJob)
+            @foreach ($job->employer->offeredJobs as $otherJob)
                 <div class="mb-4 flex justify-between">
                     <div>
                         <div class="text-slate-700">

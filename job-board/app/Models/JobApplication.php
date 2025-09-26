@@ -14,14 +14,14 @@ class JobApplication extends Model
         'user_id',
         'offered_job_id',
         'expected_salary',
-        // 'cv_path'
+        'cv_path'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function job()
+    public function offeredJob()
     {
         return $this->belongsTo(OfferedJob::class);
     }

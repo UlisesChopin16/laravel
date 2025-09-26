@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('', fn() => to_route('offered_jobs.index'));
+Route::get('', [OfferedJobController::class, 'index']);
 
 Route::resource('offered_jobs', OfferedJobController::class)
     ->only(['index', 'show']);
@@ -27,9 +27,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('my-job-applications', MyJobApplicationController::class)
         ->only(['index', 'destroy']);
 
-    // Route::resource('employer', EmployerController::class)
-    //     ->only(['create', 'store']);
+    Route::resource('employer', EmployerController::class)
+        ->only(['create', 'store']);
 
-    // Route::middleware('employer')
-    //     ->resource('my-jobs', MyJobController::class);
+    Route::middleware('employer')
+        ->resource('my-jobs', MyJobController::class);
 });

@@ -13,21 +13,21 @@ class MyJobApplicationController extends Controller
      */
     public function index()
     {
-        // $applications = request()->user()->jobApplications()->with(['job', 'job.employer'])->latest()->get();
+        $applications = request()->user()->jobApplications()
+                    ->with([
+                        'offeredJob' => fn($query) => $query->withCount('jobApplications')
+                            ->withAvg('jobApplications', 'expected_salary'),
+                            // ->withTrashed(),
+                        'offeredJob.employer'
+                    ])
+                    // ->with(['job', 'job.employer'])
+                    ->latest()->get();
         // dd($applications);
         return view(
             'my_job_application.index',
             [
-                // 'applications' => $applications,
-                'applications' => request()->user()->jobApplications()
-                    ->with([
-                        'job' => fn($query) => $query->withCount('jobApplications')
-                            ->withAvg('jobApplications', 'expected_salary'),
-                            // ->withTrashed(),
-                        'job.employer'
-                    ])
-                    // ->with(['job', 'job.employer'])
-                    ->latest()->get()
+                'applications' => $applications,
+                // 'applications' =>
             ]
         );
     }

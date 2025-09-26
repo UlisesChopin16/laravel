@@ -9,13 +9,15 @@ class Employer extends Model
 {
     /** @use HasFactory<\Database\Factories\EmployerFactory> */
     use HasFactory;
+    
+    protected $fillable = ['company_name'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function jobs()
+    public function offeredJobs()
     {
         return $this->hasMany(OfferedJob::class);
     }

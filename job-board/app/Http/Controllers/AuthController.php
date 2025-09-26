@@ -29,7 +29,7 @@ class AuthController extends Controller
         $remember = $request->filled('remember');
 
          if (Auth::attempt($credentials, $remember)) {
-            return redirect()->intended('/');
+            return redirect()->intended()->with('success', 'Logged in successfully');
         } else {
             return redirect()->back()
                 ->with('error', 'Invalid credentials');
@@ -46,6 +46,6 @@ class AuthController extends Controller
         request()->session()->invalidate();
         request()->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/') ->with('success', 'Logged out successfully');
     }
 }
